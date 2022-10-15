@@ -1,6 +1,4 @@
-### Dia 1
-
-* **Fecha**: 10/14/2022
+# Dia 1
 
 ## Actividades 
 
@@ -8,6 +6,7 @@
 - [x] Test de la instalación 
 - [x] Creación y test de un primer programa
 - [x] Capitulo 1 del libro ([Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html))
+- [x] Instalar la extensión **rust-analyzer** de Rust de Visual Studio Code
 
 ### Actividad 1 - Instalación de Rust
 
@@ -117,41 +116,97 @@ rustup doc
 
 ### Actividad 3 - Primer programa de test
 
+#### Compilación sencilla usando el rustc
+
 Se siguio la sección 1.2 [Hello, World!](https://doc.rust-lang.org/book/ch01-02-hello-world.html). Se siguieron las instrucciones y el resultado fue el esperado.
 
 1. Creación del directorio de trabajo
+   
+   ```
+   mkdir hello_world
+   cd hello_world
+   ```
 
-```
-mkdir hello_world
-cd hello_world
-```
-
-2. Creación del archivo
-
-[main.rs](../hello_world/main.rs)
-
-```rs
-fn main() {
-    println!("Hello, world!");
-}
-```
+2. Creación del archivo [main.rs](../hello_world/main.rs)
+   
+   ```rs
+   fn main() {
+       println!("Hello, world!");
+   }
+   ```
 
 3. Compilación
-
-```
-rustc main.rs
-```
+   
+   ```
+   rustc main.rs
+   ```
 
 4. Ejecución
+   
+   ```
+   ./main
+   ```
+   
+   El resultado fue el esperado y se muestra a continuación:
+   
+   ```
+   Hello, world!
+   ```
+
+Para generar codigo automaticamente ver https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html
+
+#### Compilación sencilla usando cargo
+
+Se siguio la sección 1.3 [Hello, Cargo!](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html).
+
+Cargo es el sistema de compilación y el gestor de paquetes; este permite realizar tareas como:
+* Compilar codigo.
+* Descargar y compilar dependencias (librerias de las que depende el codigo).
+
+La ventaja de usar Cargo, es que agregar dependencias se hace mucho mas facil. Para verificar la instalación de Cargo usamos:
 
 ```
-./main
+cargo --version
 ```
+A continuación se muestra como crear un proyecto en cargo:
 
-El resultado fue el esperado y se muestra a continuación:
+1. Crear un proyecto con cargo:
+   
+   ```
+   cargo new hello_cargo
+   cd hello_cargo
+   ```
+
+2. Los archivos y directorios generados son:
+   * [hello_cargo](../hello_cargo/): Directorio del proyecto  
+     *  [src](../hello_cargo/src/): Directorio de codigo
+        * [main.rs](../hello_cargo/src/main.rs): Archivo fuente don el main  
+     *  [Cargo.toml](../hello_cargo/Cargo.toml): Archivo de configuración en formato [TOML](https://toml.io/en/) (Tom’s Obvious, Minimal Language). Aqui se agregan las dependencias. En Rust los paquetes de codigo son conocidos como **crates**    
+
+3. Compile el programa ejecutando dentro del directorio raiz del proyecto el comando:
+   
+   ```
+   cargo build
+   ```
+
+4. Este comando genera el ejecutable **hello_cargo** dentro del directorio **target/debug**, asi para 
+   correrlo use:
+
+   ```
+   cargo run
+   ```
+
+   El comando ```cargo run``` si se usa compila y ejecuta permitiendo hacer todo el procedimiento en un solo paso.
+
+   Otro comando util es ```cargo check```, el cual se usa periodicamente para verificar que todo este bien pero no genera el ejecutable. Finalmente, cuando ya se esta seguro que lo que se quiere es generar el ejecutable se usa ```cargo build```.
+
+
+Para trabajar con proyectos existentes siga el siguiente template:
 
 ```
-Hello, world!
+$ git clone example.org/someproject
+$ cd someproject
+$ cargo build
 ```
 
 ## Referencias
