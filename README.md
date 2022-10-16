@@ -4,6 +4,11 @@ A modo de diario se va a ir documentando lo que va sucediendo al cacharrear con 
 
 Es util tener a la mano la siguiente referencia: [Rust Language Cheat Sheet](https://cheats.rs/)
 
+Resumen util en: https://ashleygwilliams.github.io/a-very-brief-intro-to-rust/#1
+
+
+
+
 Otros cursos recomendados para arrancar son:
 1. https://exercism.org/
 2. https://learn.microsoft.com/es-es/training/paths/rust-first-steps/

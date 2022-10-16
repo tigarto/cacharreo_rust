@@ -63,11 +63,28 @@ fn main() {
 |---|---|---|
 |Estandar|```std```||
 |I/O|```std::io```|Modulo ```io``` Se encuentra dentro de ```std```|
+|rand|```rand::Rng```|Se debe agregar en el archivo **Cargo.toml** la ```rand``` crate como dependencia (```rand = "0.8.3"```).|
 
+Para actualizar las librerias que esta usando use ```cargo update```, con esto se .
 
 **Salida en pantalla**:
 
 Se usa ```println!``` la cual es una macro que imprime un string en pantalla.
+
+Mediante el uso de las llaves se puede imprimir el valor de una variable.
+
+```rs
+println!("You guessed: {guess}");
+```
+
+Para imprimir mas de una variable, puede basarse en el fragmento de codigo mostrado a continuación:
+
+```rs
+let x = 5;
+let y = 10;
+
+println!("x = {} and y = {}", x, y);
+```
 
 **Declaración de variables**:
 
@@ -107,24 +124,37 @@ io::stdin().read_line(&mut guess).expect("Failed to read line");
 
 Pero lo ideal es escribir la espresión dividiendola, usando **```.method_name()``` syntax**
 
-Handling Potential Failure with the Result Type
+**Generación de numeros aletorios**:
 
+Rust no incluye la funcionalidad para la generación de numeros aleatorios en su libreria estandar. En vez de ello, proporciona una **rand crate** con esta funcionalidad.
 
+>
+> **crate**<br> 
+> Es una colección de archivos fuente de rust. El **rand crate** es una libreria crate la cual contiene codigo que será usado por otros programas. 
+> 
 
-
-we’ll create a variable to store the user input, like this:
-
-let mut guess = String::new(); 
-
-We use the let statement to create the variable.
-
-In Rust, variables are immutable by default, meaning once we give the variable a value, the value won't change.
-To make a variable mutable, we add mut before the variable name:
-
-
-
+```rs
+use std::io;
 use rand::Rng;
 
+fn main() {
+    println!("Guess the number!");
+
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+
+    println!("The secret number is: {secret_number}");
+
+    println!("Please input your guess.");
+
+    let mut guess = String::new();
+
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read line");
+
+    println!("You guessed: {guess}");
+}
+```
 
 println! is a macro that prints a string to the screen:
 
