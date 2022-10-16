@@ -60,15 +60,16 @@ fn main() {
 **Sobre la librerias**:
 
 |Libreria|nombre|Comentarios|
-|---|---||
+|---|---|---|
 |Estandar|```std```||
 |I/O|```std::io```|Modulo ```io``` Se encuentra dentro de ```std```|
 
 
 **Salida en pantalla**:
+
 Se usa ```println!``` la cual es una macro que imprime un string en pantalla.
 
-**Declaración de variables**
+**Declaración de variables**:
 
 Para declara variables se usa ```let```. En Rust, las variables son inmutables por defecto (una vez creadas no pueden cambiar de valor). Para hacer que estas puedan modificarse se debe agregar ```mut``` antes del nombre de la variable.
 
@@ -83,7 +84,7 @@ Para crear una variable tipo ```String``` (Mas exactamente una instancia tipo ``
 let mut guess = String::new();
 ```
 
-**Entrada de datos**
+**Entrada de datos**:
 
 Se usa la función ```stdin``` que se encuentran dentro del modulo ```io``` de ```std``` , la parte ```read_line(&mut guess)``` llama al metodo ```read_line```, al usar ```&mut guess``` decimos donde se almacenará lo que se ingresa por teclado. El ```&``` significa que el argumento pasado es una referencia. Se escribe ```&mut guess``` en vez de ```&guess``` para indicar que la variable es mutable.
 
@@ -92,7 +93,21 @@ io::stdin()
     .read_line(&mut guess)
 ```
 
-Siguiendo con lo demás,
+Como puede haber una potencial falla cuando de acuerdo al tipo de resultado se agrega:
+
+```rs
+.expect("Failed to read line");
+```
+
+Asi, la expresión completa para entrar un dato por teclado queda:
+
+```rs
+io::stdin().read_line(&mut guess).expect("Failed to read line");
+```
+
+Pero lo ideal es escribir la espresión dividiendola, usando **```.method_name()``` syntax**
+
+Handling Potential Failure with the Result Type
 
 
 
