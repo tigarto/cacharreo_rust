@@ -14,6 +14,8 @@ Para la instalación de rust se siguió la sección [Installation](https://doc.r
 1. Primero se instralo [Visual Studio C++ Build tools](https://visualstudio.microsoft.com/es/visual-cpp-build-tools/), esto se ejecuto sin problemas.
 2. Luego se descargo la aplicación rustup al presionar el boton **[DOWNLOAD RUSTUP-INIT.EXE (64-BIT)](https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe)**
 
+No obstante en [Set up your dev environment on Windows for Rust](https://learn.microsoft.com/en-us/windows/dev-environment/rust/setup?source=recommendations) se explica muy bien el proceso en windows.
+
 **Conclusiones:**
 1. El proceso de instalación fue exitoso. La siguiente salida muestra el resultado que se obtuvo:
 
@@ -127,7 +129,7 @@ Se siguio la sección 1.2 [Hello, World!](https://doc.rust-lang.org/book/ch01-02
    cd hello_world
    ```
 
-2. Creación del archivo [main.rs](../hello_world/main.rs)
+2. Creación del archivo [main.rs](./hello_world/main.rs)
    
    ```rs
    fn main() {
@@ -178,10 +180,10 @@ A continuación se muestra como crear un proyecto en cargo:
    ```
 
 2. Los archivos y directorios generados son:
-   * [hello_cargo](../hello_cargo/): Directorio del proyecto  
-     *  [src](../hello_cargo/src/): Directorio de codigo
-        * [main.rs](../hello_cargo/src/main.rs): Archivo fuente don el main  
-     *  [Cargo.toml](../hello_cargo/Cargo.toml): Archivo de configuración en formato [TOML](https://toml.io/en/) (Tom’s Obvious, Minimal Language). Aqui se agregan las dependencias. En Rust los paquetes de codigo son conocidos como **crates**    
+   * [hello_cargo](./hello_cargo/): Directorio del proyecto  
+     *  [src](./hello_cargo/src/): Directorio de codigo
+        * [main.rs](./hello_cargo/src/main.rs): Archivo fuente don el main  
+     *  [Cargo.toml](./hello_cargo/Cargo.toml): Archivo de configuración en formato [TOML](https://toml.io/en/) (Tom’s Obvious, Minimal Language). Aqui se agregan las dependencias. En Rust los paquetes de codigo son conocidos como **crates**    
 
 3. Compile el programa ejecutando dentro del directorio raiz del proyecto el comando:
    
