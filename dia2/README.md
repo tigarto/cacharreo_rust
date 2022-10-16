@@ -156,17 +156,19 @@ fn main() {
 }
 ```
 
-println! is a macro that prints a string to the screen:
+**Generando la documentación del programa**
 
-Creación de variables
+```
+cargo doc --open
+```
+
+![doc_rust_project](doc_game.png)
+
+## Referncias
 
 
-
-To obtain user input and then print the result as output, we need to bring the io input/output library into scope. The io library comes from the standard library, known as std:
-
-
-https://prev.rust-lang.org/es-ES/documentation.html
-https://reberhardt.com/cs110l/spring-2020/
-https://events.static.linuxfound.org/sites/events/files/slides/rust-4-cpp2.pdf
-https://static.linaro.org/connect/lvc21f/presentations/LVC21F-317.pdf
-https://docs.google.com/presentation/d/1Xrzj8Ul690fJr6MjfNWOiF2mPKsVwX1g4FCLtOT-vdQ/edit#slide=id.g4b027f704f_1_174
+* https://prev.rust-lang.org/es-ES/documentation.html
+* https://reberhardt.com/cs110l/spring-2020/
+* https://events.static.linuxfound.org/sites/events/files/slides/rust-4-cpp2.pdf
+* https://static.linaro.org/connect/lvc21f/presentations/LVC21F-317.pdf
+* https://docs.google.com/presentation/d/1Xrzj8Ul690fJr6MjfNWOiF2mPKsVwX1g4FCLtOT-vdQ/edit#slide=id.g4b027f704f_1_174
