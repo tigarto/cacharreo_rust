@@ -10,11 +10,32 @@
 Antes de empezar vamos a tener a la mano la referencia: [Rust Language Cheat Sheet](https://cheats.rs/)
 
 Aqui se veran algnos conceptos básicos que se usaran cuando se codifica un programa:
+* ```&```
 * ```let```
+* ```mut```
 * ```match```
+* ```println!```
+* ```String```:
+  * ```String::new```
+  * 
 * Metodos
 * Funciones asociadas.
-* Uso de dependencias externas (external crates)
+* Uso de dependencias externas (external crates): ```use```
+  * ```std```
+    *  ```Result```
+       * ```expect```   
+  * ```std::io```:
+    * ```io::stdin()```
+      *  ```read_line```         
+  * ```rand::Rng```
+    *  ```rand::thread_rng```
+       *   ```gen_range```  
+  * ```std::cmp::Ordering``` 
+    * ```Ordering```
+      *  ```Less``` 
+      *  ```Greater``` 
+      *  ```Equal``` 
+
 
 **Problema - Juego de adivinanzas**
 
@@ -64,6 +85,7 @@ fn main() {
 |Estandar|```std```||
 |I/O|```std::io```|Modulo ```io``` Se encuentra dentro de ```std```|
 |rand|```rand::Rng```|Se debe agregar en el archivo **Cargo.toml** la ```rand``` crate como dependencia (```rand = "0.8.3"```).|
+||```std::cmp::Ordering```||
 
 Para actualizar las librerias que esta usando use ```cargo update```, con esto se .
 
@@ -164,8 +186,111 @@ cargo doc --open
 
 ![doc_rust_project](doc_game.png)
 
-## Referncias
+**Realizando comparaciones**
 
+```rs
+use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
+
+fn main() {
+    // --snip--
+
+    println!("You guessed: {guess}");
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
+}
+```
+
+El corazon de la comparación esta en hacer uso de ```match```, una **expresión match** o expresión a comparar hace referencia al patrón la que se encuentra entre las llaves ```{expresion}``` y que sera usado para la comparación (**Psd**: No se si esto esta bien traducido o es fiel a lo que se quiere decir en ingles).
+
+Aqui hay un ejemplo de uso:
+
+```rs
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+```
+
+Finalmente, antes de dejar el codigo funcional, es necesario convertir la variable ```guess``` de String entero lo cual se hace con la siguiente instrucción (para mas información ver [parse](https://doc.rust-lang.org/std/primitive.str.html#method.parse)):
+
+```rs
+let mut guess = String::new();
+
+// Notese que guess ya se habia definido
+let guess: u32 = guess.trim().parse().expect("Please type a number!");
+```
+
+Rust a diferencia de C permite por asi decirlo redefinir variables que previamente se han definido (algo similar a lo que pasa en python con una variable que en un momento es de un tipo y luego esa misma es de otro), lo cual permite ahorrarse el uso de tener que declarar una nueva variable (Tal ocmo ```guess_str``` y ```guess``` por ejemplo). Ahora si retornando a la expresión de interes tenemos:
+
+```rs
+let guess: u32 = guess.trim().parse().expect("Please type a number!");
+```
+
+En esta, lo que se hace es asociar a la nueva variable la expresión ```guess.trim().parse()```. Aqui, ```guess``` se refiere a la variable original, el string leido, al cual se le aplica el método en el cual metodo ```trim``` para eliminar los espacios en blanco al principio y al final del string,  con el método ```parse``` se realiza la conversión de tipo, y finalmente mediante el ```expect``` se hace la verificación del tipo, haciendo que se saque el mensaje **Please type a number!** cuando el programa se sale por un error cuando no se pone a la entrada un entero. 
+
+---- Aca vamos ----
+
+**Realizando comparaciones**
+
+
+## Codigo final
+
+```rs
+use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
+
+fn main() {
+    println!("Guess the number!");
+
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+
+    loop {
+        println!("Please input your guess.");
+
+        let mut guess = String::new();
+
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        println!("You guessed: {guess}");
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }
+    }
+}
+```
+
+## Referncias
 
 * https://prev.rust-lang.org/es-ES/documentation.html
 * https://reberhardt.com/cs110l/spring-2020/
