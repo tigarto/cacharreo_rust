@@ -2,7 +2,7 @@
 
 ## Actividades 
 
-- [ ] Capitulo 2 del libro ([Programming a Guessing Game](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html))
+- [x] Capitulo 2 del libro ([Programming a Guessing Game](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html))
 
 
 ### Actividad 2 - Programming a Guessing Game
@@ -144,7 +144,13 @@ Asi, la expresión completa para entrar un dato por teclado queda:
 io::stdin().read_line(&mut guess).expect("Failed to read line");
 ```
 
-Pero lo ideal es escribir la espresión dividiendola, usando **```.method_name()``` syntax**
+Pero lo ideal es escribir la espresión dividiendola, usando **```.method_name()``` syntax** de modo que la expresión anterior queda asi:
+
+```rs
+io::stdin()
+    .read_line(&mut guess)
+    .expect("Failed to read line");
+```
 
 **Generación de numeros aletorios**:
 
@@ -178,6 +184,24 @@ fn main() {
 }
 ```
 
+En el codigo anterior se usa ```Rgn``` (cuando se agrega ```rand::Rng```) para la implementación de los numeros aleatorios, la parte que genera el numero aleatorio es:
+
+```rs
+let secret_number = rand::thread_rng()       // Se obtiene el generador de numeros aletorios
+                    .gen_range(1..=100);     // Metodo que genera el numero aleatorio en el rango: 
+                                             //   start..=end
+```
+
+Hasta aqui, se tendrá un programa que genera numeros aleatorios, asi:
+
+```
+Guess the number!
+The secret number is: 7
+Please input your guess.
+4
+You guessed: 4
+```
+
 **Generando la documentación del programa**
 
 ```
@@ -187,6 +211,8 @@ cargo doc --open
 ![doc_rust_project](doc_game.png)
 
 **Realizando comparaciones**
+
+Para poder comparar se va hacer uso del tipo ```std::cmp::Ordering```, el tipo ```Ordering``` es un **enum** con tres variantes: ```Less```, ```Greater```, y ```Equal```.
 
 ```rs
 use rand::Rng;
@@ -208,7 +234,24 @@ fn main() {
 
 El corazon de la comparación esta en hacer uso de ```match```, una **expresión match** o expresión a comparar hace referencia al patrón la que se encuentra entre las llaves ```{expresion}``` y que sera usado para la comparación (**Psd**: No se si esto esta bien traducido o es fiel a lo que se quiere decir en ingles).
 
-Aqui hay un ejemplo de uso:
+Aqui hay dos ejemplos de uso:
+
+* **Ejemplo 1**:
+
+```rs
+let x = 1;
+
+match x {
+    1 => println!("one"),
+    2 => println!("two"),
+    3 => println!("three"),
+    4 => println!("four"),
+    5 => println!("five"),
+    _ => println!("something else"),
+}
+```
+
+* **Ejemplo 2**:
 
 ```rs
 enum Coin {
@@ -228,6 +271,8 @@ fn value_in_cents(coin: Coin) -> u8 {
 }
 ```
 
+Para saber mas sobre la expresión ```match``` puede consultar el link [match expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html)
+
 Finalmente, antes de dejar el codigo funcional, es necesario convertir la variable ```guess``` de String entero lo cual se hace con la siguiente instrucción (para mas información ver [parse](https://doc.rust-lang.org/std/primitive.str.html#method.parse)):
 
 ```rs
@@ -243,11 +288,84 @@ Rust a diferencia de C permite por asi decirlo redefinir variables que previamen
 let guess: u32 = guess.trim().parse().expect("Please type a number!");
 ```
 
-En esta, lo que se hace es asociar a la nueva variable la expresión ```guess.trim().parse()```. Aqui, ```guess``` se refiere a la variable original, el string leido, al cual se le aplica el método en el cual metodo ```trim``` para eliminar los espacios en blanco al principio y al final del string,  con el método ```parse``` se realiza la conversión de tipo, y finalmente mediante el ```expect``` se hace la verificación del tipo, haciendo que se saque el mensaje **Please type a number!** cuando el programa se sale por un error cuando no se pone a la entrada un entero. 
+En esta, lo que se hace es asociar a la nueva variable la expresión ```guess.trim().parse()```. Aqui, ```guess``` se refiere a la variable original, el string leido, al cual se le aplica el método en el cual metodo ```trim``` para eliminar los espacios en blanco al principio y al final del string,  con el método ```parse``` se realiza la conversión de tipo, y finalmente mediante el ```expect``` se hace la verificación del tipo, haciendo que se saque el mensaje **Please type a number!** cuando el programa se sale por un error cuando no se pone a la entrada un entero. En resumen:
 
----- Aca vamos ----
+```rs
+let guess: u32 = guess.                             // Variable original guess (String)
+                 trim().                            // Metodo qeu elimina espacios del string
+                 parse().                           // Metodo que realiza la conversión del tipo
+                 expect("Please type a number!");   // Metodo en el que se hace la verificación del tipo
+```
 
-**Realizando comparaciones**
+Hasta aca la salida del programa seria:
+
+```
+Guess the number!
+The secret number is: 58
+Please input your guess.
+  76
+You guessed: 76
+Too big!
+```
+
+**Agregando ciclos**
+
+Existen varias formas de generar ciclos en Rust. En este ejemplo se usa la palabra clave ```loop``` la cual permite crear un ciclo infinito. (Para mas información puede consultar la referencia [Infinite loops](https://doc.rust-lang.org/stable/reference/expressions/loop-expr.html#infinite-loops)). Al agregar esta parte el codigo queda:
+
+```rs
+    // --snip--
+
+    println!("The secret number is: {secret_number}");
+
+    loop {
+        println!("Please input your guess.");
+
+        // --snip--
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => println!("You win!"),
+        }
+    }
+}
+```
+
+Como el ciclo anterior es infinito, mediante el uso de la combinación de teclas **CTRL + C** o escribiendo una entrada invalida (algo que no sea un numero (**quit** por ejemplo)) el programa termina, pero esa no es la idea de modo que lo unico que se tiene que modificar es la parte de la logica cuando se le atina al resultado agregando un ```break``` para romper el ciclo:
+
+```rs
+        // --snip--
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }
+    }
+}
+```
+
+**Validación de entradas invalidas**
+
+En este ejemplo, mediante la validación de entradas lo que se busca es que el programa no colapse. 
+
+```rs
+let guess: u32 = guess.trim().parse().expect("Please type a number!");
+```
+
+En el caso de la entrada asociada al numero a adivinar, la validación se hace de tal modo que cuanto se ingrese un dato erroneo (algo no numerico), el programa continue. Asi:  
+
+```rs
+let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+```
+
+El resultado obtenido ```parse()``` es un ```result``` ([Module std::result](https://doc.rust-lang.org/std/result/)) y este tiene dos posibles salidas ```Ok(T)``` y ```Err(T)```, de modo que lo que se hace es colocar el comportamiento esperado cuando se de cada una de las variantes que se tiene como salida, lo cual para el caso implico que se siguiera en el código.
 
 
 ## Codigo final
@@ -290,7 +408,7 @@ fn main() {
 }
 ```
 
-## Referncias
+## Referencias
 
 * https://prev.rust-lang.org/es-ES/documentation.html
 * https://reberhardt.com/cs110l/spring-2020/
