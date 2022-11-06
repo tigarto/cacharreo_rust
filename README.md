@@ -19,11 +19,12 @@ Otros cursos recomendados para arrancar son:
 7. https://exercism.org/tracks/rust
    
 
-### Dia 1
+### Avance
 
 |Dia|Actividad|Fecha|Link|
 |---|---|---|---|
 |1|Puesta en marcha de herramientas|10/14/2022|[Dia 1](./dia1/)|
+|2|Capitulo 2 del libro **The Rust Programming Language**: [Programming a Guessing Game](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html)|10/14/2022|[Dia 2](./dia2/)|
 
 ## Referencias
 
