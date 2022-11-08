@@ -8,7 +8,7 @@
       - [x] Analisis de Código ([variables](./variables/))
    - [ ] Tipos de datos ([link](https://doc.rust-lang.org/book/ch03-02-data-types.html))
       - [ ] Apuntes
-      - [ ] Analisis de Código
+      - [x] Analisis de Código ([data_types](./data_types/))
    - [ ] Funciones ([link](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html))
       - [ ] Apuntes
       - [ ] Analisis de Código
@@ -101,10 +101,44 @@ fn main() {
 // The value of x is: 6
 ```
 
-:shipit:
+**Disculpas**: Aun no hemos acabado pero planeamos hacerlo... :shipit:
+
+
+## Tipos de datos
+
+Se inicio y se avanzo en el tutorial empezando la ejecución de los siguientes comandos:
+
+```
+cargo new data_types
+cd data_types
+```
+
+En el directorio que se crea: [data_types](./data_types/) se encuentra el codigo fuente de los ejemplos analizados en [main.rs](../dia1/hello_cargo/src/main.rs)
+
+
+```rs
+let guess: u32 = "42".parse().expect("Not a number!");
+```
+
+| Length | Signed | Unsigned |
+|---|---|---|
+| 8-bit | i8 | u8 |
+| 16-bit | i16 | u16 |
+| 32-bit | i32 | u32 |
+| 64-bit | i64 | u64 |
+| 128-bit | i128 | u128 |
+| Architecture-specific (32/64) | isize | usize |
 
 
 
+## Para ensayar luego
+
+1. https://runmycode.online/
+2. https://github.com/judge0/judge0
+3. https://visualstudiomagazine.com/articles/2021/08/31/github-vs-code.aspx
+4. https://stackoverflow.com/questions/6551446/can-i-run-html-files-directly-from-github-instead-of-just-viewing-their-source
+5. https://raw.githack.com/ (ver)
+6. https://www.gitpod.io/
 
 
 
