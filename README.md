@@ -24,7 +24,8 @@ Otros cursos recomendados para arrancar son:
 |Dia|Actividad|Fecha|Link|
 |---|---|---|---|
 |1|Puesta en marcha de herramientas|10/14/2022|[Dia 1](./dia1/)|
-|2|Capitulo 2 del libro **The Rust Programming Language**: [Programming a Guessing Game](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html)|10/14/2022|[Dia 2](./dia2/)|
+|2|Capitulo 2 del libro **The Rust Programming Language**: [Programming a Guessing Game](https://rust-book.cs.brown.edu/ch02-00-guessing-game-tutorial.html)|10/14/2022|[Dia 2](./dia2/)|
+|3|Capitulo 3 del libro **The Rust Programming Language**: [Common Programming Concepts](https://rust-book.cs.brown.edu/ch03-00-common-programming-concepts.html)|10/14/2022|[Dia 3](./dia3/)|
 
 ## Referencias
 
