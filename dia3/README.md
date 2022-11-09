@@ -11,7 +11,7 @@
       - [x] Analisis de Código ([data_types](./data_types/))
    - [ ] Funciones ([link](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html))
       - [ ] Apuntes
-      - [ ] Analisis de Código
+      - [x] Analisis de Código
    - [ ] Comentarios ([link](https://doc.rust-lang.org/book/ch03-04-comments.html))
       - [ ] Apuntes
       - [ ] Analisis de Código
@@ -113,7 +113,7 @@ cargo new data_types
 cd data_types
 ```
 
-En el directorio que se crea: [data_types](./data_types/) se encuentra el codigo fuente de los ejemplos analizados en [main.rs](../dia1/hello_cargo/src/main.rs)
+En el directorio que se crea: [data_types](./data_types/) se encuentra el codigo fuente de los ejemplos analizados en [main.rs](../dia3/data_types/src/main.rs)
 
 
 ```rs
@@ -130,6 +130,163 @@ let guess: u32 = "42".parse().expect("Not a number!");
 | Architecture-specific (32/64) | isize | usize |
 
 
+**Disculpas**: Aun no hemos acabado pero planeamos hacerlo... :shipit:
+
+## Funciones
+
+Se inicio y se avanzo en el tutorial empezando la ejecución de los siguientes comandos:
+
+```
+cargo new functions
+cd functions
+```
+
+En el directorio que se crea: [functions](./functions/) se encuentra el codigo fuente de los ejemplos analizados en [main.rs](./functions/src/main.rs)
+
+### Apuntes a la loca...
+
+* La función ```main``` es el punto de entrada.
+* Rust usa el **snake case** [link](https://en.wikipedia.org/wiki/Snake_case) como estilo convensional para funciones y nombres de variables. En este, todas las letras con escritas en minusculas y las palabras se separan usando guión bajo. 
+
+```rs
+fn main() {
+    println!("Hello, world!");
+
+    another_function();
+}
+
+fn another_function() {
+    println!("Another function.");
+}
+```
+
+### Statements and expressions
+
+* El cuerpo de las funciones esta hecho de una serie de sentencias (statements) y opcionalmente terminan en una expresion (expression).
+* Al ser Rust un **expression-based language** ([link](https://en.wikipedia.org/wiki/Expression-oriented_programming_language#:~:text=An%20expression%2Doriented%20programming%20language,languages%20often%20treat%20as%20statements.)) es importante distinguir entre **statement** y **expression**:
+  * **Statement**: Son instrucciones que realizan alguna tarea sin retornar un valor.
+    * Instrucciones dentro una funcion.
+  
+      ```rs
+      fn main() {
+         let y = 6; // Statement
+      }
+      ```
+
+    * Definiciones de funciones (Cuerpo completo del ejemplo anterior). 
+  * **Expression**: Son instrucciones que al evaluarse retornan un valor.
+    * Las expresiones pueden ser parte de statements.
+    * Llamar a una funcion es una expresion.
+    * Llamar a una macro es una expresión.
+    * Un nuevo bloque creado entre llaves es una expresión:
+      
+      ```rs
+      fn main() {
+         let y = {
+            let x = 3;
+            x + 1  // Importante, no hay punto y coma al final de una expresion
+         }; 
+         // y = 4
+
+         /*
+         La expresion: 
+         {
+            let x = 3;
+            x + 1
+         }
+         */
+         
+         println!("The value of y is: {y}");
+      }
+      ```
+
+
+* **Sintaxis de una función**
+
+  * **Cuando la función no retorna**:
+  
+     * **Definición**:
+  
+        ```rs
+        fn function_name(param1: type1, param2: type2,...) {
+           // Code
+        }
+        ```
+
+     * **Invocación**:
+
+        ```rs
+        function_name(arg1, arg2,...);
+        ```
+
+  * **Cuando la función retorna**:
+     
+     * **Definición**:
+  
+        ```rs
+        fn function_name(param1: type1, param2: type2,...) -> return_type {
+           // Code
+        }
+        ```
+
+     * **Invocación**:
+
+        ```rs
+        var_name = function_name(arg1, arg2,...);
+        ```
+
+
+* **Ejemplos de funciones**:
+  
+  * **Sin parametros y sin retorno**:
+
+     ```rs
+     fn function_hello() {
+        println!("Hello World");
+     }
+     ```
+
+  * **Con parametros y sin retorno**:
+
+     ```rs
+     fn another_function(x: i32) {
+        println!("The value of x is: {x}");
+     }
+
+     fn print_labeled_measurement(value: i32, unit_label: char) {
+        println!("The measurement is: {value}{unit_label}");
+     }
+     ```
+   * **Sin parametros y con retorno**:
+     ```rs
+     fn foo() -> bool { 
+        true 
+     }
+
+     fn five() -> i32 {
+        5
+     }
+     ```
+  
+   * **Con parametros y con retorno**:
+
+     ```rs     
+     fn plus_one(x: i32) -> i32 {
+        x + 1
+     }     
+     ```
+
+**Disculpas**: Aun no hemos acabado pero planeamos hacerlo... :shipit:
+
+## Comentarios
+
+Permiten documentar
+
+**Disculpas**: Aun no hemos acabado pero planeamos hacerlo... :shipit:
+
+## Control de flujo
+
+**Disculpas**: Aun no hemos acabado pero planeamos hacerlo... :shipit:
 
 ## Para ensayar luego
 
